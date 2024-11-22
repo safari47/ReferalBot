@@ -158,3 +158,23 @@
 2024-11-22 at 13:28:29 | INFO | Бот успешно запущен.
 2024-11-22 at 13:30:35 | INFO | Бот успешно запущен.
 2024-11-22 at 13:33:44 | INFO | Бот успешно запущен.
+2024-11-22 at 18:30:44 | INFO | Бот успешно запущен.
+2024-11-22 at 18:32:52 | INFO | Бот успешно запущен.
+2024-11-22 at 18:38:12 | INFO | Бот успешно запущен.
+2024-11-22 at 18:39:32 | INFO | Бот успешно запущен.
+2024-11-22 at 18:40:37 | ERROR | Ошибка при проверке подписки: Telegram server says - Bad Request: member list is inaccessible
+2024-11-22 at 18:40:43 | ERROR | Ошибка при проверке подписки: Telegram server says - Bad Request: member list is inaccessible
+2024-11-22 at 18:40:47 | ERROR | Ошибка при проверке подписки: Telegram server says - Bad Request: member list is inaccessible
+2024-11-22 at 18:43:24 | INFO | Бот успешно запущен.
+2024-11-22 at 18:43:40 | INFO | Ошибка отправки пользователю 341119656: Telegram server says - Bad Request: inline keyboard button URL '❌ ОТМЕНА' is invalid: Disallowed character in URL host
+2024-11-22 at 18:45:10 | INFO | Бот успешно запущен.
+2024-11-22 at 18:47:17 | ERROR | Ошибка при проверке канала: Telegram server says - Bad Request: chat not found
+2024-11-22 at 18:47:20 | ERROR | Ошибка при проверке канала: Telegram server says - Bad Request: chat not found
+2024-11-22 at 18:47:24 | ERROR | Ошибка при проверке канала: Telegram server says - Bad Request: chat not found
+2024-11-22 at 19:01:50 | INFO | Бот успешно запущен.
+2024-11-22 at 19:02:17 | ERROR | Ошибка при проверке канала: Telegram server says - Bad Request: chat not found
+2024-11-22 at 19:02:19 | ERROR | Ошибка при проверке канала: Telegram server says - Bad Request: chat not found
+2024-11-22 at 19:02:23 | ERROR | Ошибка при проверке канала: Telegram server says - Bad Request: chat not found
+2024-11-22 at 19:06:53 | INFO | Бот успешно запущен.
+2024-11-22 at 19:07:54 | INFO | Бот успешно запущен.
+2024-11-22 at 19:08:13 | ERROR | Ошибка при проверке канала: Telegram server says - Bad Request: chat not found

@@ -12,6 +12,7 @@ import json
 router = Router()
 
 
+
 @router.message(lambda message: message.text == "🧍‍♂️ USER INFO" and message.from_user.id == settings.ADMIN_ID)
 async def user_info(message: Message):
     try:
@@ -32,6 +33,10 @@ async def user_info(message: Message):
         # Работаем с ошибками
         await message.answer(f"Произошла ошибка: {str(e)}")
 
+@router.message(lambda message: message.text == "❌ ОТМЕНА")
+async def cancel_action(message: Message, state: FSMContext):
+    await state.clear()
+    await message.answer("Действие отменено. Возвращаюсь в главное меню.", reply_markup = main_kb(message.from_user.id))
 
 @router.message(lambda message: message.text == "✅ ADD CHANEL SUB" and message.from_user.id == settings.ADMIN_ID)
 async def add_chanel_sub(message: Message, state: FSMContext):
@@ -48,7 +53,6 @@ async def add_chanel_sub_title(message: Message, state: FSMContext):
         "Введите ссылку на канал (например, @example или https://t.me/example):",
         reply_markup=fsm_button(),
     )
-
 
 @router.message(SubChanel.url)
 async def add_chanel_sub_url(message: Message, state: FSMContext, bot):
@@ -75,7 +79,6 @@ async def add_chanel_sub_url(message: Message, state: FSMContext, bot):
         text=f"Канал успешно добавлен в базу данных:\n\n**Заголовок:** {title}\n**Ссылка:** {url}",
         reply_markup=main_kb(message.from_user.id),
     )
-
 
 @router.message(lambda message: message.text == "❌ DEL CHANEL SUB" and message.from_user.id == settings.ADMIN_ID)
 async def del_chanel_sub(message: Message, state: FSMContext):
@@ -186,14 +189,6 @@ async def broadcast_message_url(message: Message, state: FSMContext):
     )
     # Очищаем состояние
     await state.clear()
-
-@router.message(lambda message: message.text == "❌ ОТМЕНА")
-async def cancel_action(message: Message, state: FSMContext):
-    await state.clear()
-    await message.answer(
-        "Действие отменено. Возвращаюсь в главное меню.",
-        reply_markup=main_kb(message.from_user.id),
-    )
 
 
 @router.message(
