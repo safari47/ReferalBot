@@ -1,4 +1,4 @@
-from sqlalchemy import String, BigInteger, Integer
+from sqlalchemy import String, BigInteger, Integer,Boolean
 from sqlalchemy.orm import Mapped, mapped_column
 from .database import Base
 
@@ -13,6 +13,7 @@ class User(Base):
     refer_id: Mapped[int] = mapped_column(BigInteger, nullable=True)
 
     refer_count: Mapped[int] = mapped_column(Integer, nullable=True, default=0)
+    acess:Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
 
 class Chanel(Base):
     __tablename__ = "channels"

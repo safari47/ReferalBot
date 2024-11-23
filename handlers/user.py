@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.filters import CommandStart, CommandObject
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
 from loguru import logger
 from keyboards.keyboards import (
     main_kb,
@@ -8,7 +8,7 @@ from keyboards.keyboards import (
 )
 from aiogram.utils.deep_linking import create_start_link
 from config.config import bot
-from db.dao import set_user, get_chanels, get_user
+from db.dao import add_user, get_chanels, get_user, acess_open
 from utils.utils import payload, is_user_subscribed
 
 
@@ -19,22 +19,28 @@ router = Router()
 @router.message(CommandStart())
 async def start(message: Message, command: CommandObject):
     invite_id = payload(command.args)
-    user = await set_user(
-        user_id=message.from_user.id,
-        first_name=message.from_user.first_name,
-        last_name=message.from_user.last_name,
-        username=message.from_user.username,
-        refer_id=invite_id,
-    )
-    if user:
+    user_data = await get_user(user_id=message.from_user.id)
+    if user_data is None:
+        await add_user(
+            user_id=message.from_user.id,
+            first_name=message.from_user.first_name,
+            last_name=message.from_user.last_name,
+            username=message.from_user.username,
+            refer_id=invite_id,
+        )
+        acess = False
+    else:
+        acess = user_data.acess
+
+    if acess:
         await message.answer(
-            f"Привет! Я готов к работе. 🔗",
-            reply_markup=main_kb(user_id=message.from_user.id),
+            f"Привет, {user_data.first_name}! Я готов к работе. 🔗",
+            reply_markup=main_kb(message.from_user.id),
         )
     else:
-        kb = await get_chanels()
         await message.answer(
-            "Для использования бота нужно подписаться", reply_markup=chanels_kb(kb)
+            "Для пользования ботом необходимо подписаться на следующие каналы:",
+            reply_markup=chanels_kb(await get_chanels()),
         )
 
 
@@ -53,6 +59,7 @@ async def check_subs_func(call: CallbackQuery):
                 f"❌ вы не подписались на канал 👉 {title}", reply_markup=chanels_kb(kb)
             )
             return False
+    await acess_open(user_id=call.from_user.id, acess=True)
     await call.message.answer(
         "Спасибо за подписки на все каналы! Теперь можете воспользоваться функционалом бота",
         reply_markup=main_kb(call.from_user.id),
